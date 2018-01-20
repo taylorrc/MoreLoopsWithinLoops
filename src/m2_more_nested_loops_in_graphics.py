@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Ryan Taylor.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,9 +49,52 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    new_rectangle = rectangle.clone()
+
+    for k in range(n + 1):
+        # new_rectangle = rectangle.clone()
+
+        # for j in range(k):
+        #     next_rectangle = new_rectangle.clone()
+        #
+        #     corner_1x = new_rectangle.corner_1.x + (new_rectangle.get_width() * j)
+        #     corner_2x = new_rectangle.corner_2.x + (new_rectangle.get_width() * j)
+        #
+        #     next_rectangle.corner_1.x = corner_1x
+        #     next_rectangle.corner_2.x = corner_2x
+        #
+        #     next_rectangle.attach_to(window)
+        #     window.render(0.05)
+
+        corner1x = rectangle.corner_1.x - ((rectangle.get_width() / 2) * k)
+        corner1y = rectangle.corner_1.y - (rectangle.get_height() * k)
+        corner2x = rectangle.corner_2.x - ((rectangle.get_width() / 2) * k)
+        corner2y = rectangle.corner_2.y - (rectangle.get_height() * k)
+
+        corner1 = rg.Point(corner1x, corner1y)
+        corner2 = rg.Point(corner2x, corner2y)
+
+        new_rectangle.corner_1 = corner1
+        new_rectangle.corner_2 = corner2
+
+        new_rectangle.attach_to(window)
+
+        for j in range(k):
+            next_rectangle = new_rectangle.clone()
+
+            corner_1x = new_rectangle.corner_1.x + (new_rectangle.get_width() * j)
+            corner_2x = new_rectangle.corner_2.x + (new_rectangle.get_width() * j)
+
+            next_rectangle.corner_1.x = corner_1x
+            next_rectangle.corner_2.x = corner_2x
+
+            next_rectangle.attach_to(window)
+            window.render(0.05)
+
+        window.render(0.05)
 
 
 # ----------------------------------------------------------------------
